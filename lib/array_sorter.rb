@@ -10,26 +10,67 @@ class Array
   end
 
   def merge_sort
-    merge_sort_helper(self)
+    ms_sort(self)
+  end
+
+  def quick_sort
+    q_sort(self)
+  end
+
+  def radix_sort
+    rad_sort(self, 1, find_max(self))
   end
 
   private
 
-  def merge_sort_helper(unsorted_array)
-    return unsorted_array if unsorted_array.size == 1
-
-    split = (unsorted_array.size / 2).to_i
-    left = merge_sort_helper(unsorted_array.slice(0, split))
-    right = merge_sort_helper(unsorted_array.slice(split, unsorted_array.size))
-
-    merge_sorter(left, right)
+  def find_max(arr)
+    max = 0
+    arr.each { |e| max = e if e > max }
+    max
   end
 
-  def merge_sorter(left, right)
-    sorted_array = []
-    until left.empty? || right.empty?
-      sorted_array.push(left.first <= right.first ? left.shift : right.shift)
+  def rad_sort(arr, exp, max)
+    return arr if exp > max
+    buckets = [[],[],[],[],[],[],[],[],[],[]]
+
+    arr.each do |el|
+      digit = (el / exp) % 10
+      buckets[digit] << el
     end
-    sorted_array + left + right
+    rad_sort(buckets.flatten, exp * 10, max)
+  end
+
+  def q_sort(arr)
+    return arr if arr.size <= 1
+    small = []
+    large = []
+    pindex = rand(arr.size)
+    pivot = arr[pindex]
+
+    arr.each_with_index do |el, index|
+      next if index == pindex
+      small << el if el <= pivot
+      large << el if el > pivot
+    end
+    small = q_sort(small)
+    small + [pivot] + q_sort(large)
+  end
+
+  def ms_sort(arr)
+    return arr if arr.size == 1
+
+    split = (arr.size / 2).to_i
+    left = ms_sort(arr.slice(0, split))
+    right = ms_sort(arr.slice(split, arr.size))
+
+    ms_merge(left, right)
+  end
+
+  def ms_merge(left, right)
+    sorted = []
+    until left.empty? || right.empty?
+      sorted.push(left.first <= right.first ? left.shift : right.shift)
+    end
+    sorted + left + right
   end
 end
