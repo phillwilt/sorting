@@ -11,7 +11,7 @@ class Stack < LinkedList
   end
 
   def pop
-    delete_at(0).val
+    remove(@head)
   end
 
   def size

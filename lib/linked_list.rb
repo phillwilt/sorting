@@ -1,52 +1,43 @@
-Node = Struct.new(:val, :ptr)
+Node = Struct.new(:value, :next)
 
 class LinkedList
   attr_reader :size
 
   def initialize
     @head = nil
+    @tail = nil
     @size = 0
   end
 
   def add(node)
-    node.ptr = @head
+    node.next = @head
+    @tail = node if @size == 0
     @head = node
     @size += 1
   end
 
-  def delete_at(index)
+  def remove(node)
     temp = @head
-    current = @head
-    for i in (0..index)
-      prev = current
-      current = current.ptr
-    end
-    prev = current.ptr
+    @head = temp.next
     @size -= 1
-    temp
+    temp.value
   end
 
-  def find(val)
+  def search(value)
     curr = @head
-    i = -1
     while curr != nil
-      i += 1
-      return i if curr.val == val
-      curr = curr.ptr
+      return curr if curr.value == value
+      curr = curr.next
     end
     nil
   end
 
-  def includes?(val)
-    self.find(val) != nil
+  def includes?(value)
+    self.search(value) != nil
   end
 
-  def value_at(index)
-    curr = @head
-    for i in (0..index - 1)
-      curr = curr.ptr
-    end
-    curr.val
+  def pop
+    remove(@head)
   end
 
   def reverse!
@@ -54,7 +45,7 @@ class LinkedList
     curr = @head
     while curr != nil
       prev = curr
-      curr = prev.ptr
+      curr = prev.next
     end
     @head = prev
   end
