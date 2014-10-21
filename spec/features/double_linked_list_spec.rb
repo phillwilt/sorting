@@ -1,25 +1,25 @@
 require 'spec_helper'
-require 'linked_list'
+require 'double_linked_list'
 require 'pry'
 
-describe 'singly linked list' do
+describe 'doubly linked list' do
   before do
-    @list = LinkedList.new
-    (1..26).each { |e| @list.add(LinkedList::Node.new(e, nil)) }
+    @list = DoubleLinkedList.new
+    (1..26).each { |e| @list.add(DoubleLinkedList::Node.new(e, nil)) }
   end
 
   it 'keeps track of size' do
     @list.size.must_equal 26
   end
 
-  it 'removes a LinkedList::node' do
-    value = @list.remove(LinkedList::Node.new(1))
+  it 'removes a DoubleLinkedList::node' do
+    value = @list.remove(DoubleLinkedList::Node.new(1))
     @list.size.must_equal 25
     value.must_equal 26
   end
 
   it 'searchs an element' do
-    @list.search(1).must_be_instance_of LinkedList::Node
+    @list.search(1).must_be_instance_of DoubleLinkedList::Node
   end
 
   it 'includes an element' do
@@ -30,7 +30,7 @@ describe 'singly linked list' do
     @list.includes?(100).must_equal false
   end
 
-  it 'pops a LinkedList::node' do
+  it 'pops a DoubleLinkedList::node' do
     value = @list.pop
     value.must_equal 26
   end
