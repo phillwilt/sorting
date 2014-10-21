@@ -1,20 +1,20 @@
 require 'linked_list'
 
-class Stack
+class Stack < LinkedList
 
   def initialize
-    @list = LinkedList.new
+    super
   end
 
   def push(val)
-    @list.add(Node.new(val, nil))
+    add(Node.new(val, nil))
   end
 
   def pop
-    @list.delete_at(0).val
+    delete_at(0).val
   end
 
   def size
-    @list.size
+    @size
   end
 end
