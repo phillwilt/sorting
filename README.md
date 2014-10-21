@@ -1,5 +1,7 @@
-Sorting Algs in Ruby
-=====
+# Data Structures and Algorthms in Ruby
+
+## Sorting Algs in Ruby
+
 
 Using Ruby's open classes to add various sorting algorithms to the array class.
 
@@ -46,3 +48,10 @@ Reverse Time:
 Random Time:
   1.230000   0.060000   1.290000 (  1.292844)
 ```
+## Linked List
+
+Nothing new under the sun
+
+## Stack
+
+Stack implementation in Ruby using a linked list
