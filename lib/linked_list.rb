@@ -15,6 +15,7 @@ class LinkedList
   end
 
   def delete_at(index)
+    temp = @head
     current = @head
     for i in (0..index)
       prev = current
@@ -22,7 +23,7 @@ class LinkedList
     end
     prev = current.ptr
     @size -= 1
-    current
+    temp
   end
 
   def find(val)
