@@ -13,9 +13,9 @@ describe 'singly linked list' do
   end
 
   it 'deletes a node at an index' do
-    node = @list.delete_at(10)
+    node = @list.delete_at(0)
     @list.size.must_equal 25
-    node.val.must_equal 15
+    node.val.must_equal 26
   end
 
   it 'finds an element' do
