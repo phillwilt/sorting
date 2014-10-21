@@ -1,0 +1,20 @@
+require 'spec_helper'
+require 'stack'
+require 'pry'
+
+describe 'stack' do
+  before do
+    @stack = Stack.new
+    (1..26).each { |e| @stack.push(e) }
+  end
+
+  it 'keeps track of size' do
+    @stack.size.must_equal 26
+  end
+
+  it 'pops a node' do
+    top = @stack.pop()
+    top.must_equal 26
+    @stack.size.must_equal 25
+  end
+end
