@@ -18,11 +18,10 @@ class DoubleLinkedList
   end
 
   def remove(node)
-    @tail = node.prev if node == @tail
-    temp = @head
-    @head = temp.next
+    node.prev.next = node.next if node != @head
+    node.next.prev = node.prev if node != @tail
     @size -= 1
-    temp.value
+    node.value
   end
 
   def search(value)

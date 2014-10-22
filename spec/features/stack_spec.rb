@@ -17,4 +17,10 @@ describe 'stack' do
     top.must_equal 26
     @stack.size.must_equal 25
   end
+
+  it 'raises a stack empty error' do
+    stack = Stack.new
+    stack_err = lambda { stack.pop }
+    stack_err.must_raise Stack::StackEmptyError
+  end
 end

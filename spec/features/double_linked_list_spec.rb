@@ -13,9 +13,11 @@ describe 'doubly linked list' do
   end
 
   it 'removes a DoubleLinkedList::node' do
-    value = @list.remove(DoubleLinkedList::Node.new(1))
-    @list.size.must_equal 25
-    value.must_equal 26
+    node = DoubleLinkedList::Node.new(1);
+    @list.add(node)
+    value = @list.remove(node)
+    @list.size.must_equal 26
+    value.must_equal 1
   end
 
   it 'searchs an element' do
