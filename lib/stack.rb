@@ -1,6 +1,8 @@
 require 'linked_list'
 
 class Stack < LinkedList
+  class StackEmptyError < RuntimeError
+  end
 
   def initialize
     super
@@ -11,7 +13,8 @@ class Stack < LinkedList
   end
 
   def pop
-    delete_at(0).val
+    raise StackEmptyError if @size == 0
+    remove(@head)
   end
 
   def size

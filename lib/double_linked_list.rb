@@ -1,23 +1,27 @@
-class LinkedList
-  Node = Struct.new(:value, :next)
+class DoubleLinkedList
+  Node = Struct.new(:value, :next, :prev)
+
   attr_reader :size
 
   def initialize
     @head = nil
+    @tail = nil
     @size = 0
   end
 
   def add(node)
     node.next = @head
+    @head.prev = node if @head
+    @tail = node if @size == 0
     @head = node
     @size += 1
   end
 
   def remove(node)
-    temp = @head
-    @head = temp.next
+    node.prev.next = node.next if node != @head
+    node.next.prev = node.prev if node != @tail
     @size -= 1
-    temp.value
+    node.value
   end
 
   def search(value)
@@ -35,15 +39,5 @@ class LinkedList
 
   def pop
     remove(@head)
-  end
-
-  def reverse!
-    prev = nil
-    curr = @head
-    while curr != nil
-      prev = curr
-      curr = prev.next
-    end
-    @head = prev
   end
 end

@@ -52,6 +52,14 @@ Random Time:
 
 Nothing new under the sun
 
+## Double Linked List
+
+Easier for Queues as it keeps track of head and tail.
+
 ## Stack
 
 Stack implementation in Ruby using a linked list
+
+## Queue
+
+Double linked list implementation.

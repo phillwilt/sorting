@@ -5,21 +5,21 @@ require 'pry'
 describe 'singly linked list' do
   before do
     @list = LinkedList.new
-    (1..26).each { |e| @list.add(Node.new(e, nil)) }
+    (1..26).each { |e| @list.add(LinkedList::Node.new(e, nil)) }
   end
 
   it 'keeps track of size' do
     @list.size.must_equal 26
   end
 
-  it 'deletes a node at an index' do
-    node = @list.delete_at(0)
+  it 'removes a LinkedList::node' do
+    value = @list.remove(LinkedList::Node.new(1))
     @list.size.must_equal 25
-    node.val.must_equal 26
+    value.must_equal 26
   end
 
-  it 'finds an element' do
-    @list.find(1).must_equal 25
+  it 'searchs an element' do
+    @list.search(1).must_be_instance_of LinkedList::Node
   end
 
   it 'includes an element' do
@@ -30,16 +30,8 @@ describe 'singly linked list' do
     @list.includes?(100).must_equal false
   end
 
-  it 'retrieves a value at an index' do
-    @list.value_at(25).must_equal 1
-  end
-
-  it 'knows value of its head' do
-    @list.value_at(0).must_equal 26
-  end
-
-  it 'reverses in place' do
-    @list.reverse!
-    @list.value_at(0).must_equal 1
+  it 'pops a LinkedList::node' do
+    value = @list.pop
+    value.must_equal 26
   end
 end
