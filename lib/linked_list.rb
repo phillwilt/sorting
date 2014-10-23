@@ -34,6 +34,7 @@ class LinkedList
   end
 
   def pop
+    @size -= 1
     remove(@head)
   end
 
