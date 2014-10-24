@@ -13,13 +13,6 @@ class LinkedList
     @size += 1
   end
 
-  def remove(node)
-    temp = @head
-    @head = temp.next
-    @size -= 1
-    temp.value
-  end
-
   def search(value)
     curr = @head
     while curr != nil
@@ -33,10 +26,6 @@ class LinkedList
     self.search(value) != nil
   end
 
-  def pop
-    remove(@head)
-  end
-
   def reverse!
     prev = nil
     curr = @head
@@ -45,5 +34,38 @@ class LinkedList
       curr = prev.next
     end
     @head = prev
+  end
+
+  def remove(node, current_node = @head)
+    if first_node_matches(node, current_node)
+      return node.value
+    elsif second_node_matches(node, current_node)
+      return node.value
+    end
+
+    remove(node, current_node.next)
+
+  rescue NoMethodError => e
+    nil if e.to_s.match(/value/)
+  end
+
+  private
+
+  def first_node_matches(node, current_node)
+    if node.value == current_node.value
+      @head = @head.next
+      @size -= 1
+      return true
+    end
+    false
+  end
+
+  def second_node_matches(node, current_node)
+    if node.value == current_node.next.value
+      current_node.next = current_node.next.next
+      @size -= 1
+      return true
+    end
+    false
   end
 end

@@ -63,3 +63,17 @@ Stack implementation in Ruby using a linked list
 ## Queue
 
 Double linked list implementation.
+
+## Hash
+
+Naive hashing alg. Linked List is used for handling collisions. Thanks to @sunny-mittal
+
+Benchmark:
+
+```
+Starting to read...
+Time:
+  1.990000   0.040000   2.030000 (  2.038454)
+Finished storing 235886 words
+Load: 279
+```

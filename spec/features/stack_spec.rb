@@ -20,7 +20,6 @@ describe 'stack' do
 
   it 'raises a stack empty error' do
     stack = Stack.new
-    stack_err = lambda { stack.pop }
-    stack_err.must_raise Stack::StackEmptyError
+    lambda { stack.pop }.must_raise RuntimeError
   end
 end
