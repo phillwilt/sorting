@@ -3,7 +3,8 @@ require 'benchmark'
 hash = Hash.new(1024)
 
 total = 0
-print 'Starting to read...'
+print "Starting to read...\n"
+print "Time:\n"
 puts Benchmark.measure {
   File.foreach('/usr/share/dict/words') do |word|
      hash.set(word, word.reverse)
