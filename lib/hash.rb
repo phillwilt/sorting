@@ -18,15 +18,14 @@ class Hash
     @table = Array.new(1024)
     @mod = size - 1
     @load = 0
-    set_load_factor(size)
+  end
+
+  def size
+    return @table.size
   end
 
   def set(key, val)
-    position = hash(key)
-    @table[position] = LinkedList.new unless @table[position]
-    @table[position].add(create_node(key, val))
-    @load = @table[position].size if @table[position].size > @load
-    expand if @load > @load_factor
+    add(key, val)
   end
 
   def get(key)
@@ -37,33 +36,21 @@ class Hash
 
   private
 
+  def add(key,val)
+    position = hash(key)
+    @table[position] = LinkedList.new unless @table[position]
+    @table[position].add(create_node(key, val))
+    @load = @table[position].size if @table[position].size > @load
+  end
+
   def create_node(key, val)
-    LinkedList::Node.new([key, val], nil)
+    LinkedList::Node.new([key, val])
   end
 
   def hash(key)
-    hash = 0
-    ord = 1
-    key.each_char { |c| hash += c.to_i * 10**ord && ord += 1 }
-    hash % @mod
-  end
-
-  def set_load_factor(size)
-    @load_factor = size / 100
-  end
-
-  def expand
-    @load = 0
-    arr = @table
-    size = arr.size * 2
-    set_load_factor(size)
-    @table = Array.new(size)
-
-    arr.each do |list|
-      while list && list.size > 0
-        pair = list.pop
-        set(pair[0], pair[1])
-      end
+    hash = key.each_char.each_with_index.reduce(0) do |acc, char_array|
+      acc + char_array[0].ord * 17**char_array[1]
     end
+    hash % @mod
   end
 end

@@ -23,8 +23,13 @@ describe 'hash' do
     @hash.load.must_be :>, 0
   end
 
-  it 'expands when it hits its load factor' do
-    5_000.times { |i| @hash.set(i.to_s, i.to_s.reverse) }
-    @hash.get(5_000.to_s).must_equal 5_000.to_s.reverse
+  it 'is reliable' do
+    File.foreach('/usr/share/dict/words') do |word|
+       @hash.set(word, word.reverse)
+    end
+
+    File.foreach('/usr/share/dict/words') do |word|
+       @hash.get(word).must_equal word.reverse
+    end
   end
 end

@@ -5,17 +5,11 @@ require 'pry'
 describe 'singly linked list' do
   before do
     @list = LinkedList.new
-    (1..26).each { |e| @list.add(LinkedList::Node.new(e, nil)) }
+    (1..26).each { |e| @list.add(LinkedList::Node.new(e)) }
   end
 
   it 'keeps track of size' do
     @list.size.must_equal 26
-  end
-
-  it 'removes a LinkedList::node' do
-    value = @list.remove(LinkedList::Node.new(1))
-    @list.size.must_equal 25
-    value.must_equal 26
   end
 
   it 'searchs an element' do
@@ -30,8 +24,17 @@ describe 'singly linked list' do
     @list.includes?(100).must_equal false
   end
 
-  it 'pops a LinkedList::node' do
-    value = @list.pop
-    value.must_equal 26
+  it 'removes a node' do
+    node = @list.search(10)
+    node.must_be_instance_of LinkedList::Node
+    val = @list.remove(node)
+    @list.size.must_equal 25
+    val.must_equal 10
+  end
+
+  it 'will not remove a node not in the list' do
+    val = @list.remove(LinkedList::Node.new(100))
+    val.must_equal nil
+    @list.size.must_equal 26
   end
 end
