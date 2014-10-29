@@ -77,3 +77,7 @@ Time:
 Finished storing 235886 words
 Load: 279
 ```
+
+## Binary Search Tree
+
+Implemantation of binary search tree with pre, in, and post order DFS recursive algorithms.
