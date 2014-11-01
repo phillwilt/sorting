@@ -34,10 +34,20 @@ class DoubleLinkedList
   end
 
   def includes?(value)
-    self.search(value) != nil
+    search(value) != nil
   end
 
   def pop
     remove(@head)
+  end
+
+  def remove_duplicates
+    els = {}
+    curr = @head
+    while curr
+      remove curr if els[curr.value]
+      els[curr.value] = true
+      curr = curr.next
+    end
   end
 end
