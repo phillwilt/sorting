@@ -5,7 +5,7 @@ require 'pry'
 describe 'doubly linked list' do
   before do
     @list = DoubleLinkedList.new
-    (1..26).each { |e| @list.add(DoubleLinkedList::Node.new(e, nil)) }
+    (1..26).each { |e| @list.add DoubleLinkedList::Node.new(e) }
   end
 
   it 'keeps track of size' do
@@ -13,7 +13,7 @@ describe 'doubly linked list' do
   end
 
   it 'removes a DoubleLinkedList::node' do
-    node = DoubleLinkedList::Node.new(1);
+    node = DoubleLinkedList::Node.new(1)
     @list.add(node)
     value = @list.remove(node)
     @list.size.must_equal 26
@@ -35,5 +35,12 @@ describe 'doubly linked list' do
   it 'pops a DoubleLinkedList::node' do
     value = @list.pop
     value.must_equal 26
+  end
+
+  it 'removes duplicates' do
+    10.times { |i| @list.add DoubleLinkedList::Node.new(i + 1) }
+    @list.size.must_equal 36
+    @list.remove_duplicates
+    @list.size.must_equal 26
   end
 end
